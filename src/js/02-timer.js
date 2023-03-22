@@ -49,17 +49,12 @@ const countdown = new Countdown({
   onTick: updateClockFace,
 });
 
-const days = 0;
-const hours = 0;
-const mins = 0;
-const secs = 0;
-
 const refs = {
     startBtn: document.querySelector('button[data-start]'),
-    days: document.querySelector('span[data-days]'),
-    hours: document.querySelector('span[data-hours]'),
-    minutes: document.querySelector('span[data-minutes]'),
-    seconds: document.querySelector('span[data-seconds]'),
+    days: document.querySelector('.timer span[data-days]'),
+    hours: document.querySelector('.timer span[data-hours]'),
+    minutes: document.querySelector('.timer span[data-minutes]'),
+    seconds: document.querySelector('.timer span[data-seconds]'),
     dateTime: document.querySelector('#datetime-picker')
 };
 
@@ -71,11 +66,14 @@ refs.startBtn.addEventListener('click', () => {
   countdown.start();
 });
 
-function updateClockFace({ days, hours, mins, secs }) {
-  refs.days = days;
-  refs.hours = hours;
-  refs.minutes = mins;
-  refs.seconds = secs;
+function updateClockFace(time) {
+  if (time.seconds < 0) {
+    return;
+  }
+  refs.days.textContent = `${time.days}:`;
+  refs.hours.textContent = `${time.hours}:`;
+  refs.minutes.textContent = `${time.minutes}:`;
+  refs.seconds.textContent = time.seconds;
 };
     
 const options = {
@@ -83,13 +81,11 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-    onClose(selectedDates) { 
-      console.log(`selectedDates[0]`, selectedDates[0]);
-      console.log(`flatDate1`, flatDate);
+  onClose(selectedDates) {
+      console.log(selectedDates[0]);
       flatDate = selectedDates[0].getTime();
-      console.log(`flatDate2`, flatDate);
         if (selectedDates[0] < dateNow) {
-        //   ref.startBtn.dataset.start.disabled = true;
+          refs.startBtn.dataset.start.disabled = true;
           console.error("Please choose a date in the future");
           window.alert("Please choose a date in the future");
           return;
@@ -98,4 +94,4 @@ const options = {
 };
 
 refs.dateTime.addEventListener('click', flatpickr("#datetime-picker", options));
-
+ 
