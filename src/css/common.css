@@ -47,3 +47,19 @@ img {
   flex-wrap: wrap;
   margin-right: 10px;
 }
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+}
+
+.form input {
+  margin-right: 10px;
+}
+.text {
+  position: relative;
+}
+.form button {
+  height: 30%;
+}
