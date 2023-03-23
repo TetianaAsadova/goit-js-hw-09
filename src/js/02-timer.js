@@ -85,13 +85,14 @@ const options = {
       console.log(selectedDates[0]);
       flatDate = selectedDates[0].getTime();
         if (selectedDates[0] < dateNow) {
-          refs.startBtn.dataset.start.disabled = true;
+          refs.startBtn.setAttribute('disabled', true);
           console.error("Please choose a date in the future");
           window.alert("Please choose a date in the future");
           return;
-      }
+        } else {
+          refs.startBtn.removeAttribute('disabled', true);
+        }
   },
 };
 
 refs.dateTime.addEventListener('click', flatpickr("#datetime-picker", options));
- 

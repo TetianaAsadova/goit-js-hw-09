@@ -11,6 +11,8 @@ startBtnRef.addEventListener('click', onStartChangeColorBody);
 stopBtnRef.addEventListener('click', onStopChangeColorBody);
 
 function onStartChangeColorBody(e) {
+    startBtnRef.setAttribute('disabled', true);
+    stopBtnRef.removeAttribute('disabled', true);
     if (isActive) {
         return;
     };
@@ -21,6 +23,8 @@ function onStartChangeColorBody(e) {
 }
 
 function onStopChangeColorBody(e) {
+    stopBtnRef.setAttribute('disabled', true);
+    startBtnRef.removeAttribute('disabled', true);
     isActive = false;
     clearInterval(intervalId);
 }
